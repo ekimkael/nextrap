@@ -1,0 +1,15 @@
+/* TEAM */
+  Title: Frontend Developer
+  Site: ekimkael.github.io
+  Twitter: @ekimkael
+  Location: Yaounde, Cameroon
+
+/* SITE */
+  Last Update: 2020/09/15
+  Standard: HTML5, CSS3, JS/ESNext
+  Components: React, Nextjs, Bootstrap, Sass
+  Software: VS Code
+
+/* THANKS */
+  Name: 
+

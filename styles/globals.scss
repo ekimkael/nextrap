@@ -1,0 +1,7 @@
+$primary: #6610f2;
+$secondary: rgb(6, 94, 225);
+$primary: $primary;
+$secondary: $secondary;
+
+// Import Bootstrap and its default variables
+@import "~bootstrap/scss/bootstrap.scss";
