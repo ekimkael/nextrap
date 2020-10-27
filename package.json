@@ -8,10 +8,13 @@
     "start": "next start"
   },
   "dependencies": {
+    "@hookform/resolvers": "^1.0.0",
     "bootstrap": "^4.5.2",
     "next": "9.5.3",
     "react": "16.13.1",
     "react-dom": "16.13.1",
-    "sass": "^1.26.10"
+    "react-hook-form": "^6.9.6",
+    "sass": "^1.26.10",
+    "yup": "^0.29.3"
   }
 }
