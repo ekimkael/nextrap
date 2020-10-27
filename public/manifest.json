@@ -3,13 +3,13 @@
 	"name": "Nextrap",
 	"lang": "en",
 	"description": "Nextjs, Bootstrap, Sass webapp scaffolder",
-	"start_url": "https://ekimkael.github.io/nextrap",
+	"start_url": "/",
 	"background_color": "#ffffff",
 	"theme_color": "#000000",
 	"dir": "ltr",
 	"display": "standalone",
 	"orientation": "portrait",
-	"prefer_related_applications": "false",
+	"prefer_related_applications": false,
 	"icons": [
 		{
 			"src": "tile.png",
