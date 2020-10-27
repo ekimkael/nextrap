@@ -1,20 +1,22 @@
 import Link from "next/link"
+import axios from "axios"
 import { useForm } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup"
-import * as yup from "yup"
-
-// validation schema
-const schema = yup.object().shape({
-	email: yup.string().email().required(),
-	password: yup.string().required(),
-})
+import { loginSchema } from "../utils/validationSchemas"
 
 function login() {
 	const { register, handleSubmit, errors } = useForm({
-		resolver: yupResolver(schema),
+		resolver: yupResolver(loginSchema),
 	})
 
-	const onSubmit = (data) => console.log(data)
+	const onSubmit = (user) => {
+		let datas = axios.post("http://localhost:1337/auth/local", {
+			identifier: user.email,
+			password: user.password,
+		})
+
+		console.log(datas)
+	}
 
 	return (
 		<div className="container">
