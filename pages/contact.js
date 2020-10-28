@@ -17,17 +17,23 @@ export default function Contact() {
 							<div className="h-scrollable">
 								<form className="my-4">
 									<div className="form-group">
-										<div className="input-group">
-											<div className="input-group-prepend">
-												<span className="input-group-text">+237</span>
+										<div className="form-row">
+											<div className="col">
+												<input
+													name="firstname"
+													type="text"
+													className={`form-control`}
+													placeholder="First name"
+												/>
 											</div>
-											<input
-												type="tel"
-												className={`form-control`}
-												placeholder="Votre numéro de téléphone"
-												name="phone_contactus"
-												id="phone_contactus"
-											/>
+											<div className="col">
+												<input
+													name="lastname"
+													type="text"
+													className={`form-control`}
+													placeholder="Last name"
+												/>
+											</div>
 										</div>
 									</div>
 

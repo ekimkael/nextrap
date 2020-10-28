@@ -10,9 +10,9 @@ export default function About() {
 
 			<Navbar />
 
-			<div className="col-md-8 mx-auto">
-				<h1 className="text-center">Team and Story</h1>
-				<p>
+			<div className="col-md-8 mx-auto py-5">
+				<h1>Team and Story</h1>
+				<p className="text-muted lead">
 					Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
 					eiusmod tempor incididunt ut labore et dolore magna aliqua. Phasellus
 					faucibus scelerisque eleifend donec pretium. Lacus luctus accumsan

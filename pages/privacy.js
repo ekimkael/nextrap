@@ -6,18 +6,18 @@ export default function Terms() {
 		<>
 			<Navbar />
 			<Head>
-				<title>Terms of Services | Nextrap</title>
+				<title>Privacy policies | Nextrap</title>
 			</Head>
 
 			<div className="col-md-8 mx-auto py-5">
 				<h1>
-					Terms and Conditions sample for
+					Privacy policies sample for
 					<span className="highlight preview_company_name"> Nextrap</span>
 				</h1>
 				<h4>Introduction</h4>
 				<p>
-					These Website Standard Terms and Conditions written on this webpage
-					shall manage your use of our website,{" "}
+					These Website Standard Privacy policies written on this webpage shall
+					manage your use of our website,{" "}
 					<span className="highlight preview_website_name">Webiste Name</span>{" "}
 					accessible at{" "}
 					<span className="highlight preview_website_url">Website.com</span>.
@@ -116,6 +116,13 @@ export default function Terms() {
 					including its officers, directors and employees shall not be held
 					liable for any indirect, consequential or special liability arising
 					out of or in any way related to your use of this Website.
+				</p>
+				<h4>Indemnification</h4>
+				<p>
+					You hereby indemnify to the fullest extent from and against any and/or
+					all liabilities, costs, demands, causes of action, damages and
+					expenses arising in any way related to your breach of any of the
+					provisions of these Terms.
 				</p>
 				<h4>Severability</h4>
 				<p>

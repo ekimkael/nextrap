@@ -21,7 +21,7 @@ export default function Home() {
 						<h1>
 							Welcome to
 							<a
-								className="text-success"
+								className="text-primary"
 								href="https://github.com/ekimkael/nextrap"
 							>
 								{" "}
@@ -33,12 +33,6 @@ export default function Home() {
 							A simple Nextjs app boilerplate with steroid packages to boost
 							your productivity and helps you quick started your project
 						</p>
-
-						<h3>Documentation &rarr;</h3>
-						<p>Find in-depth information about Next.js features and API.</p>
-
-						<h3 className="text-secondary">Learn &rarr;</h3>
-						<p>Learn about Next.js in an interactive course with quizzes!</p>
 					</div>
 				</div>
 			</main>

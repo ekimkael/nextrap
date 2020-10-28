@@ -3,5 +3,18 @@ $secondary: rgb(6, 94, 225);
 $primary: $primary;
 $secondary: $secondary;
 
+.fullscreen {
+	width: 100vw;
+	height: 100vh;
+	position: relative;
+}
+
+.flex-centered {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
 // Import Bootstrap and its default variables
 @import "~bootstrap/scss/bootstrap.scss";
