@@ -1,12 +1,15 @@
 import { useRouter } from "next/router";
+import { useCookies } from "react-cookie";
 
 const Username = () => {
+  const [cookies, setCookie, removeCookie] = useCookies(["cookie-name"]);
+
   const router = useRouter();
   const { username } = router.query;
   return (
     <div className="container-fluid  p-0 ">
       <div className="bg-white ">
-        <div className="px-4 pt-5 pt-0 cover">
+        <div className="px-4 pt-3 pt-0 cover">
           <div className="media align-items-end profile-head">
             <div className="profile mr-3">
               <img
@@ -21,7 +24,7 @@ const Username = () => {
             </div>
             <div className="media-body mb-5 text-white">
               <h4 className="mt-0 mb-2">{username}</h4>
-              <p className="small mb-5">New York</p>
+              <p className="small mb-5">New York, USA</p>
             </div>
           </div>
         </div>
@@ -45,6 +48,7 @@ const Username = () => {
         <div className="py-4 px-4">
           <div className="d-flex align-items-center justify-content-between mb-3">
             <h5 className="mb-0">Recent purchase</h5>
+            <h5 className="mb-0">My Orders</h5>
             <a href="#" className="btn btn-link text-muted">
               Show all
             </a>

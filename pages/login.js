@@ -6,33 +6,33 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { loginSchema } from "../utils/validationSchemas";
 import AuthTemplate from "../templates/auth.template";
 import { useRouter } from "next/router";
+import axios from "axios";
 
 function Login() {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
+  const [user, setUser] = useState({});
   const { register, handleSubmit, errors } = useForm({
     resolver: yupResolver(loginSchema),
   });
 
   const onSubmit = (user) => {
     setLoading(true);
-    fetch("api/login", {
+
+    axios({
       method: "post",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*",
-      },
-      body: JSON.stringify({
+      url: "api/login",
+      data: {
         identifier: user.email,
         password: user.password,
-      }),
-    })
-      .then((answer) => answer.json())
-      .then((datas) => {
-        console.log(datas);
-        router.push("profile/natasha");
-      });
+      },
+    }).then(
+      (response) => {
+        setUser(response.data.user.username);
+        router.push(`/${response.data.user.firstname}`);
+      },
+      (error) => console.log(error)
+    );
   };
 
   return (

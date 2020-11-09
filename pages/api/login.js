@@ -3,7 +3,7 @@ import cookie from "cookie";
 export default function login(request, response) {
   if (request.method === "POST") {
     if (request.body !== undefined || request.body !== null) {
-      fetch("http://localhost:1337/auth/local", {
+      fetch("https://testifyio.herokuapp.com/auth/local", {
         method: "post",
         headers: {
           Accept: "application/json",
@@ -11,17 +11,24 @@ export default function login(request, response) {
           "Access-Control-Allow-Origin": "*",
         },
         body: JSON.stringify({
-          identifier: request.body.email,
+          identifier: request.body.identifier,
           password: request.body.password,
         }),
       })
         .then((answer) => answer.json())
         .then((datas) => {
-          console.log(datas);
-          if (datas.code === 1000) {
+          if (datas.statusCode === 400) {
+            response.status(400).json({
+              status: 400,
+              message: {
+                type: "error",
+                body: "email or password invalid",
+              },
+            });
+          } else {
             response.setHeader(
               "Set-Cookie",
-              cookie.serialize("_SESSIONID_", datas.token, {
+              cookie.serialize("_SESSIONID_", datas.jwt, {
                 httpOnly: true,
                 secure: process.env.NODE_ENV !== "development",
                 sameSite: "strict",
@@ -37,14 +44,7 @@ export default function login(request, response) {
                 type: "success",
                 body: "you're now logged in",
               },
-            });
-          } else {
-            response.status(400).json({
-              status: 400,
-              message: {
-                type: "error",
-                body: "email or password invalid",
-              },
+              user: datas.user,
             });
           }
         });
