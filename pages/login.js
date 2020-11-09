@@ -49,6 +49,7 @@ function Login() {
 						</h1>
 					</a>
 				</Link>
+				<h3 className="text-center text-primary">Signin</h3>
 				<div className="row">
 					{loading ? (
 						<div className="col-12 text-center my-5">
