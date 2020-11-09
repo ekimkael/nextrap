@@ -1,10 +1,11 @@
 import cookie from "cookie";
-const api = "http://localhost:1337";
+import jwt from "jsonwebtoken";
+import { convertUnixTimeToSeconds } from "../../utils/utilities";
+const api = "https://testifyio.herokuapp.com";
 
-export default function register(request, response) {
+export default async function (request, response) {
   if (request.method === "POST") {
-    console.log(request.body);
-    fetch(`${api}/auth/local/register`, {
+    await fetch(`${api}/auth/local/register`, {
       method: "post",
       headers: {
         Accept: "application/json",
@@ -13,20 +14,25 @@ export default function register(request, response) {
       },
       body: JSON.stringify(request.body),
     })
-      .then(function (response) {
-        console.log(response);
-        return response.json();
-      })
+      .then((answer) => answer.json())
       .then(function (datas) {
-        console.log(datas.statusCode);
-        if (datas.statusCode === 200) {
+        if (datas.statusCode === 400) {
+          response.status(400).json({
+            status: 400,
+            message: {
+              type: "error",
+              body: "Registration failed",
+            },
+          });
+        } else {
+          var decoded = jwt.decode(datas.jwt);
           response.setHeader(
             "Set-Cookie",
-            cookie.serialize("_SESSIONID_", datas.token, {
+            cookie.serialize("_SESSIONID_", datas.jwt, {
               httpOnly: true,
               secure: process.env.NODE_ENV !== "development",
               sameSite: "strict",
-              maxAge: 300,
+              maxAge: decoded.exp,
               path: "/",
               // maxAge: 10800,
             })
@@ -38,16 +44,11 @@ export default function register(request, response) {
               type: "success",
               body: "Registration successful",
             },
-          });
-        } else {
-          response.status(400).json({
-            status: 400,
-            message: {
-              type: "error",
-              body: "Registration failed",
-            },
+            username: datas.user.username,
           });
         }
       });
+  } else {
+    console.log(request.method);
   }
 }

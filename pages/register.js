@@ -9,6 +9,7 @@ import ShowPassword from "../organisms/ShowPassword";
 import HidePassword from "../organisms/HidePassword";
 import { useRouter } from "next/router";
 
+const api = "https://testifyio.herokuapp.com/";
 function Register() {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
@@ -16,8 +17,7 @@ function Register() {
   const { register, handleSubmit, errors } = useForm({
     resolver: yupResolver(registerSchema),
   });
-  const onSubmit = (data, e) => {
-    //console.log(data);
+  const onSubmit = (data) => {
     fetch(
       `/api/register`,
       {
@@ -32,20 +32,17 @@ function Register() {
       setLoading(true)
     )
       .then(function (response) {
-        console.log(response);
         return response.json();
       })
       .then(function (data) {
-        console.log(data);
         setLoading(false);
         if (data.status === 200) {
           //setSuccessMessage("Registration successful!");
-          router.push("/index");
+          router.push(`/${data.username}`);
         }
         setTimeout(function () {
           setSuccessMessage("");
         }, 10000);
-        e.target.reset();
       });
   };
 
@@ -60,7 +57,10 @@ function Register() {
       <div className="container">
         <h1 className="display-4 text-center">Register</h1>
         <div className="row">
-          <form className="col- mx-auto" onSubmit={handleSubmit(onSubmit)}>
+          <form
+            className="col-12 col-sm-10 col-md-6 col-lg-5 mx-auto"
+            onSubmit={handleSubmit(onSubmit)}
+          >
             <div className="form-group">
               <div className="form-row">
                 <div className="col">
@@ -98,6 +98,21 @@ function Register() {
               </div>
             </div>
 
+            <div className="form-group">
+              <input
+                name="username"
+                type="text"
+                className={`form-control ${errors.username && `is-invalid`}`}
+                //aria-describedby="emailHelp"
+                placeholder="Enter username"
+                ref={register}
+              />
+              {errors.username && (
+                <small id="username" className="form-text text-danger">
+                  {errors.username.message}
+                </small>
+              )}
+            </div>
             <div className="form-group">
               <input
                 name="email"
