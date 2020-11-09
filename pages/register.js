@@ -10,7 +10,9 @@ function Register() {
 	const { register, handleSubmit, errors } = useForm({
 		resolver: yupResolver(registerSchema),
 	})
-	const onSubmit = (data) => console.log(data)
+	const onSubmit = (data) => {
+		fetch("/api/register")
+	}
 
 	const [isShow, setIsShow] = useState(false)
 
