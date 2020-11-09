@@ -2,6 +2,7 @@ $primary: #6610f2;
 $secondary: rgb(6, 94, 225);
 $primary: $primary;
 $secondary: $secondary;
+$font-family-sans-serif:  'Karla', sans-serif,"Helvetica Neue", Helvetica, Arial, sans-serif !default;
 
 .fullscreen {
 	width: 100vw;
@@ -18,3 +19,15 @@ $secondary: $secondary;
 
 // Import Bootstrap and its default variables
 @import "~bootstrap/scss/bootstrap.scss";
+
+
+
+//Page - profil
+.cover {
+	background: #6610f2;
+}
+.profile-head {
+	transform: translateY(5rem)
+}
+
+
