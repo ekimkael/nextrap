@@ -5,9 +5,11 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { loginSchema } from "../utils/validationSchemas";
 import AuthTemplate from "../templates/auth.template";
+import { useRouter } from "next/router";
 
 function Login() {
-  const [loading, setLoading] = useState(true);
+  const router = useRouter();
+  const [loading, setLoading] = useState(false);
   const { register, handleSubmit, errors } = useForm({
     resolver: yupResolver(loginSchema),
   });
@@ -29,7 +31,7 @@ function Login() {
       .then((answer) => answer.json())
       .then((datas) => {
         console.log(datas);
-        setLoading(false);
+        router.push("profile/natasha");
       });
   };
 
