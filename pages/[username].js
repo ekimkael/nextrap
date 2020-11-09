@@ -1,9 +1,7 @@
 import { useRouter } from "next/router";
-import { useCookies } from "react-cookie";
+import { withCookies } from "react-cookie";
 
 const Username = () => {
-  const [cookies, setCookie, removeCookie] = useCookies(["cookie-name"]);
-
   const router = useRouter();
   const { username } = router.query;
   return (
@@ -59,4 +57,4 @@ const Username = () => {
   );
 };
 
-export default Username;
+export default withCookies(Username);

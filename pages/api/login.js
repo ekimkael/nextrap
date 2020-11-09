@@ -1,4 +1,5 @@
 import cookie from "cookie";
+import Login from "../login";
 
 export default function login(request, response) {
   if (request.method === "POST") {
