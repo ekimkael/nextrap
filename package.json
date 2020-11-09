@@ -20,5 +20,22 @@
     "react-hook-form": "^6.9.6",
     "sass": "^1.26.10",
     "yup": "^0.29.3"
-  }
+  },
+  "author": { 
+    "name" : "Ekim Kael", 
+    "email" : "michelmbili@gmail.com",
+    "url" : "https://ekimkael.github.io"
+  },
+  "contributors": [
+    { 
+      "name" : "Philippe Tedajo", 
+      "email" : "philmuse21@gmail.com",
+      "url" : "https://www.philippetedajo.com/"
+    },
+    { 
+      "name" : "Marcel Shinyuy", 
+      "email" : "shinyuy9@gmail.com",
+      "url" : "https://shinyuy.github.io/"
+    }
+  ]
 }

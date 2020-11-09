@@ -1,7 +1,19 @@
 /* TEAM */
   Title: Frontend Developer
-  Site: ekimkael.github.io
+  Site: https://ekimkael.github.io
   Twitter: @ekimkael
+  GitHub: @ekimkael
+  Location: Yaounde, Cameroon
+
+  Title: Frontend Developer
+  Site: https://www.philippetedajo.com/
+  Twitter: @Zambou21
+  GitHub: @philippetedajo
+  Location: Yaounde, Cameroon
+
+  Title: Frontend Developer
+  Site: https://shinyuy.github.io/
+  GitHub: @shinyuy
   Location: Yaounde, Cameroon
 
 /* SITE */
