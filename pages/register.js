@@ -37,7 +37,6 @@ function Register() {
       .then(function (data) {
         setLoading(false);
         if (data.status === 200) {
-          //setSuccessMessage("Registration successful!");
           router.push(`/${data.username}`);
         }
         setTimeout(function () {
@@ -55,7 +54,14 @@ function Register() {
       </Head>
       {/*  */}
       <div className="container">
-        <h1 className="display-4 text-center">Register</h1>
+			<Link href="/">
+					<a>
+						<h1 className="text-center">
+							<b>Nextrap</b>
+						</h1>
+					</a>
+				</Link>
+				<h3 className="text-center text-primary">Register</h3>
         <div className="row">
           <form
             className="col-12 col-sm-10 col-md-6 col-lg-5 mx-auto"

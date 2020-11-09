@@ -1,4 +1,5 @@
 import Head from "next/head"
+import Link from "next/link"
 import { useForm } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup"
 import { forgotSchema } from "../utils/validationSchemas"
@@ -19,7 +20,14 @@ const ForgotPassword = () => {
 			</Head>
 			{/*  */}
 			<div className="container">
-				<h1 className="display-4 text-center">Forgot Password</h1>
+				<Link href="/">
+					<a>
+						<h1 className="text-center">
+							<b>Nextrap</b>
+						</h1>
+					</a>
+				</Link>
+				<h3 className="text-center text-primary">Forgot Password</h3>
 				<div className="row">
 					<form className="col-md-5 mx-auto" onSubmit={handleSubmit(onSubmit)}>
 						<div className="form-group">
