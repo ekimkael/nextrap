@@ -27,7 +27,14 @@ function Login() {
 			</Head>
 			{/*  */}
 			<div className="container">
-				<h1 className="display-4 text-center">Signin</h1>
+				<Link href="/">
+					<a>
+						<h1 className="text-center">
+							<b>Nextrap</b>
+						</h1>
+					</a>
+				</Link>
+				<h3 className="text-center text-primary">Signin</h3>
 				<div className="row">
 					<form className="col-5 mx-auto" onSubmit={handleSubmit(onSubmit)}>
 						<div className="form-group">
