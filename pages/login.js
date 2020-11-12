@@ -5,12 +5,12 @@ import { useForm } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup"
 import { loginSchema } from "../utils/validationSchemas"
 import AuthTemplate from "../templates/auth.template"
-import { useRouter } from "next/router"
+import Router from "next/router"
 import axios from "axios"
 
 function Login() {
-	const router = useRouter()
 	const [loading, setLoading] = useState(false)
+	const [message, setMessage] = useState("")
 	const [user, setUser] = useState({})
 	const { register, handleSubmit, errors } = useForm({
 		resolver: yupResolver(loginSchema),
@@ -18,7 +18,6 @@ function Login() {
 
 	const onSubmit = (user) => {
 		setLoading(true)
-
 		axios({
 			method: "post",
 			url: "api/login",
@@ -28,10 +27,19 @@ function Login() {
 			},
 		}).then(
 			(response) => {
-				setUser(response.data.user.username)
-				router.push(`/${response.data.user.firstname}`)
+				setLoading(false)
+				if (response.status && response.status === 400) {
+					setMessage(response.message.body)
+				} else {
+					setUser(response.data.user.username)
+					Router.push(`/${response.data.user.firstname}`)
+				}
 			},
-			(error) => console.log(error)
+			(error) => {
+				setLoading(false)
+				setMessage(error.message)
+				console.log(error)
+			}
 		)
 	}
 
@@ -43,7 +51,7 @@ function Login() {
 			{/*  */}
 			<div className="container">
 				<Link href="/">
-					<a>
+					<a className="text-dark">
 						<h1 className="text-center">
 							<b>Nextrap</b>
 						</h1>
@@ -51,60 +59,63 @@ function Login() {
 				</Link>
 				<h3 className="text-center text-primary">Signin</h3>
 				<div className="row">
-					{loading ? (
-						<div className="col-12 text-center my-5">
-							<div className="spinner-border text-dark" role="status">
-								<span className="sr-only">Loading...</span>
+					<form className="col-5 mx-auto" onSubmit={handleSubmit(onSubmit)}>
+						{message !== "" ? (
+							<div className="alert alert-danger" role="alert">
+								{message}
 							</div>
+						) : (
+							""
+						)}
+						<div className="form-group">
+							<input
+								type="email"
+								className={`form-control ${errors.email && `is-invalid`}`}
+								name="email"
+								placeholder="Your email adress"
+								autoComplete="off"
+								ref={register}
+							/>
+							{errors.email && (
+								<small id="email" className="form-text text-danger">
+									{errors.email.message}
+								</small>
+							)}
 						</div>
-					) : (
-						<form className="col-5 mx-auto" onSubmit={handleSubmit(onSubmit)}>
-							<div className="form-group">
-								<input
-									type="email"
-									className={`form-control ${errors.email && `is-invalid`}`}
-									name="email"
-									placeholder="Your email adress"
-									autoComplete="off"
-									ref={register}
-								/>
-								{errors.email && (
-									<small id="email" className="form-text text-danger">
-										{errors.email.message}
+						<div className="form-group">
+							<input
+								type="password"
+								name="password"
+								className={`form-control ${errors.password && `is-invalid`}`}
+								placeholder="Your password"
+								ref={register}
+							/>
+							{errors.password && (
+								<small id="password" className="form-text text-danger">
+									{errors.password.message}
+								</small>
+							)}
+							<Link href="/forgot-password">
+								<a>
+									<small className="form-text text-muted text-right">
+										Forgot your password?
 									</small>
-								)}
-							</div>
-							<div className="form-group">
-								<input
-									type="password"
-									name="password"
-									className={`form-control ${errors.password && `is-invalid`}`}
-									placeholder="Your password"
-									ref={register}
-								/>
-								{errors.password && (
-									<small id="password" className="form-text text-danger">
-										{errors.password.message}
-									</small>
-								)}
-								<Link href="/forgot-password">
-									<a>
-										<small className="form-text text-muted text-right">
-											Forgot your password?
-										</small>
-									</a>
-								</Link>
-							</div>
-							<button type="submit" className="btn btn-primary btn-block">
-								LOGIN →
-							</button>
-							<Link href="/register">
-								<a className="my-4 btn btn-link btn-sm btn-block">
-									No account yet? register
 								</a>
 							</Link>
-						</form>
-					)}
+						</div>
+						<button
+							type="submit"
+							className="btn btn-primary btn-block"
+							disabled={loading === true ? true : false}
+						>
+							{loading === true ? `LOADING...` : `LOGIN →`}
+						</button>
+						<Link href="/register">
+							<a className="my-4 btn btn-link btn-sm btn-block">
+								No account yet? register
+							</a>
+						</Link>
+					</form>
 				</div>
 			</div>
 		</>
