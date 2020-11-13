@@ -18,11 +18,11 @@ export default function login(request, response) {
         .then((answer) => answer.json())
         .then((datas) => {
           if (datas.statusCode === 400) {
-            response.status(400).json({
+            response.status(200).json({
               status: 400,
               message: {
                 type: "error",
-                body: "email or password invalid",
+                body: "The email address or password is incorrect",
               },
             });
           } else {
