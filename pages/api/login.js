@@ -1,5 +1,4 @@
 import cookie from "cookie";
-import Login from "../login";
 
 export default function login(request, response) {
   if (request.method === "POST") {
@@ -30,7 +29,7 @@ export default function login(request, response) {
             response.setHeader(
               "Set-Cookie",
               cookie.serialize("_SESSIONID_", datas.jwt, {
-                httpOnly: true,
+                httpOnly: false,
                 secure: process.env.NODE_ENV !== "development",
                 sameSite: "strict",
                 maxAge: 300,
