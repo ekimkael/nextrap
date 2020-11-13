@@ -46,7 +46,7 @@ function Login() {
 	return (
 		<>
 			<Head>
-				<title>Login to your account</title>
+				<title>Login to your account | Nextrap</title>
 			</Head>
 			{/*  */}
 			<div className="container">
@@ -59,7 +59,7 @@ function Login() {
 				</Link>
 				<h3 className="text-center text-primary">Signin</h3>
 				<div className="row">
-					<form className="col-5 mx-auto" onSubmit={handleSubmit(onSubmit)}>
+					<form className="col-md-5 mx-auto" onSubmit={handleSubmit(onSubmit)}>
 						{message !== "" ? (
 							<div className="alert alert-danger" role="alert">
 								{message}
