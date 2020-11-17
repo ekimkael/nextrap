@@ -1,5 +1,6 @@
 import { useRouter } from "next/router"
 import Head from "next/head"
+import Link from "next/link"
 import { withCookies } from "react-cookie"
 
 const Username = () => {
@@ -22,9 +23,11 @@ const Username = () => {
 									width="130"
 									className="rounded mb-2 img-thumbnail"
 								/>
-								<a href=" " className="btn btn-outline-dark btn-sm btn-block">
-									Edit profile
-								</a>
+								<Link href="/settings">
+									<a className="btn btn-outline-dark btn-sm btn-block">
+										Edit profile
+									</a>
+								</Link>
 							</div>
 							<div className="media-body mb-5 text-white">
 								<h4 className="mt-0 mb-2">{username}</h4>
