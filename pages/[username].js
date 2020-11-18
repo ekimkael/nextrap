@@ -1,11 +1,36 @@
 import { useRouter } from "next/router"
 import Head from "next/head"
-import Link from "next/link"
 import { withCookies } from "react-cookie"
+import axios from "axios"
+import { useEffect, useState } from "react"
 
-const Username = () => {
+const Username = ({ allCookies }) => {
+	const [user, setUser] = useState({})
 	const router = useRouter()
 	const { username } = router.query
+
+	const getUser = () => {
+		axios
+			.get(`https://testifyio.herokuapp.com/users/me`, {
+				headers: { Authorization: `Bearer ${allCookies._SESSIONID_}` },
+			})
+			.then((res) => {
+				setUser(res.data)
+			})
+			.catch((err) => console.log(err))
+	}
+
+	useEffect(() => {
+		if (allCookies._SESSIONID_) {
+			getUser()
+		} else {
+			setUser({})
+			router.push("/login")
+		}
+	}, [allCookies])
+
+	console.log(user)
+
 	return (
 		<>
 			<Head>
@@ -23,11 +48,9 @@ const Username = () => {
 									width="130"
 									className="rounded mb-2 img-thumbnail"
 								/>
-								<Link href="/settings">
-									<a className="btn btn-outline-dark btn-sm btn-block">
-										Edit profile
-									</a>
-								</Link>
+								<a href=" " className="btn btn-outline-dark btn-sm btn-block">
+									Edit profile
+								</a>
 							</div>
 							<div className="media-body mb-5 text-white">
 								<h4 className="mt-0 mb-2">{username}</h4>
@@ -53,12 +76,18 @@ const Username = () => {
 					</div>
 
 					<div className="py-4 px-4">
-						<div className="d-flex align-items-center justify-content-between mb-3">
-							<h5 className="mb-0">Recent purchase</h5>
-							<h5 className="mb-0">My Orders</h5>
-							<a href="#" className="btn btn-link text-muted">
-								Show all
-							</a>
+						<div className="d-flex justify-content-between mb-3">
+							<h5 className="my-3">Recent purchase</h5>
+							<h5 className="my-3">My Orders</h5>
+						</div>
+						<div className="d-flex justify-content-between mb-3">
+							<div>
+								<h5 className="my-3">Personal Info</h5>
+								<div className="text-muted">firstname : {user.firstname}</div>
+								<div className="text-muted">lastname : {user.lastname}</div>
+								<div className="text-muted">username : {user.username}</div>
+								<div className="text-muted">email : {user.email}</div>
+							</div>
 						</div>
 					</div>
 				</div>
