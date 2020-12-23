@@ -1,6 +1,6 @@
 {
-  "name": "fortrading",
-  "version": "0.1.0",
+  "name": "nextrap",
+  "version": "0.2.2",
   "private": true,
   "scripts": {
     "dev": "next dev",
