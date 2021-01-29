@@ -32,7 +32,7 @@ function Login() {
 					setMessage(response.data.message.body)
 				} else {
 					setUser(response.data.user.username)
-					Router.push(`/${response.data.user.firstname}`)
+					Router.push(`/settings`)
 				}
 			},
 			(error) => {
