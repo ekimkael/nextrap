@@ -37,16 +37,19 @@ function ResetPassword() {
 			</Head>
 			{/*  */}
 			<div className="container">
-				<Link href="/">
-					<a>
-						<h1 className="text-center">
-							<b>Nextrap</b>
-						</h1>
-					</a>
-				</Link>
-				<h3 className="text-center text-primary">Reset your password</h3>
 				<div className="row">
-					<form className="col-5 mx-auto" onSubmit={handleSubmit(onSubmit)}>
+					<form
+						className="col-12 col-sm-10 col-md-7 col-lg-5 mx-auto"
+						onSubmit={handleSubmit(onSubmit)}
+					>
+						<Link href="/">
+							<a>
+								<h1 className="text-center">
+									<b>Nextrap</b>
+								</h1>
+							</a>
+						</Link>
+						<h4 className="text-center text-primary">Reset your password</h4>
 						<div className="form-group">
 							<input
 								type="password"
@@ -78,7 +81,7 @@ function ResetPassword() {
 							)}
 						</div>
 						<button type="submit" className="btn btn-primary btn-block">
-							RESET PASSWORD →
+							RESET PASSWORD
 						</button>
 					</form>
 				</div>
