@@ -1,13 +1,12 @@
-import React, { useState, useEffect } from "react"
 import Head from "next/head"
 import Link from "next/link"
+import { useRouter } from "next/router"
 import { useForm } from "react-hook-form"
+import React, { useState, useEffect } from "react"
 import { yupResolver } from "@hookform/resolvers/yup"
 import { settingsSchema } from "../utils/validationSchemas"
-import { useRouter } from "next/router"
-import { withCookies } from "react-cookie"
 
-function Settings({ info, cookies }) {
+function Settings({ info, token }) {
 	const router = useRouter()
 	const [loading, setLoading] = useState(false)
 	const [user, setUser] = useState(info)
@@ -26,7 +25,7 @@ function Settings({ info, cookies }) {
 					headers: {
 						"Content-Type": "application/json",
 						"Access-Control-Allow-Origin": "*",
-						Authorization: `Bearer ${cookies.get("_SESSIONID_")}`,
+						Authorization: `Bearer ${token}`,
 					},
 				}
 			)
@@ -186,10 +185,10 @@ Settings.getInitialProps = async (ctx) => {
 			},
 		})
 		const data = await res.json()
-		return { info: data }
+		return { info: data, token }
 	} else {
-		return { info: undefined }
+		return { info: undefined, token }
 	}
 }
 
-export default withCookies(Settings)
+export default Settings

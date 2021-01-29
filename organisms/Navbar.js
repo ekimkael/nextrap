@@ -6,7 +6,9 @@ function Navbar() {
 		<nav className="navbar navbar-expand-lg navbar-dark bg-primary">
 			<div className="container">
 				<Link href="/">
-					<a className="navbar-brand">Nextrap</a>
+					<a className="navbar-brand">
+						<b className="text-secondary">Nextrap.</b>
+					</a>
 				</Link>
 
 				<button
@@ -24,13 +26,13 @@ function Navbar() {
 				<div className="collapse navbar-collapse" id="navbarNav">
 					<ul className="navbar-nav">
 						<li className="nav-item">
-							<Link href="/contact">
-								<a className="nav-link">Contact</a>
+							<Link href="/about">
+								<a className="nav-link">About</a>
 							</Link>
 						</li>
 						<li className="nav-item">
-							<Link href="/about">
-								<a className="nav-link">About</a>
+							<Link href="/contact">
+								<a className="nav-link">Contact</a>
 							</Link>
 						</li>
 						<li className="nav-item">
@@ -58,7 +60,7 @@ function Navbar() {
 						</li>
 						<li className="nav-item">
 							<Link href="/register">
-								<a className="nav-link">Register</a>
+								<a className="btn btn-outline-secondary">Get Started</a>
 							</Link>
 						</li>
 					</ul>
