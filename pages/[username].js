@@ -1,36 +1,6 @@
-import { useRouter } from "next/router"
-import Head from "next/head"
-import { withCookies } from "react-cookie"
-import axios from "axios"
-import { useEffect, useState } from "react"
+import React from "react"
 
-const Username = ({ allCookies }) => {
-	const [user, setUser] = useState({})
-	const router = useRouter()
-	const { username } = router.query
-
-	const getUser = () => {
-		axios
-			.get(`https://testifyio.herokuapp.com/users/me`, {
-				headers: { Authorization: `Bearer ${allCookies._SESSIONID_}` },
-			})
-			.then((res) => {
-				setUser(res.data)
-			})
-			.catch((err) => console.log(err))
-	}
-
-	useEffect(() => {
-		if (allCookies._SESSIONID_) {
-			getUser()
-		} else {
-			setUser({})
-			router.push("/login")
-		}
-	}, [allCookies])
-
-	console.log(user)
-
+function Username() {
 	return (
 		<>
 			<Head>
@@ -96,4 +66,4 @@ const Username = ({ allCookies }) => {
 	)
 }
 
-export default withCookies(Username)
+export default Username
