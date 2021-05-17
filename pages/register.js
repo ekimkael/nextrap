@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import Head from "next/head"
 import Link from "next/link"
 import { useForm } from "react-hook-form"
@@ -8,44 +8,38 @@ import AuthTemplate from "../templates/auth.template"
 import ShowPassword from "../organisms/ShowPassword"
 import HidePassword from "../organisms/HidePassword"
 import { useRouter } from "next/router"
+import AuthContext from "../context/AuthContext"
 
-const api = "https://testifyio.herokuapp.com/"
 function Register() {
 	const router = useRouter()
-	const [loading, setLoading] = useState(false)
-	const [successMessage, setSuccessMessage] = useState("")
+	const [isShow, setIsShow] = useState(false)
+	const { user, loading, signup, verify } = useContext(AuthContext)
 	const { register, handleSubmit, errors } = useForm({
 		resolver: yupResolver(registerSchema),
 	})
+
+	useEffect(() => {
+		verify()
+		router.push("/account")
+	}, [])
+
 	const onSubmit = (data) => {
-		fetch(
-			`/api/register`,
-			{
-				method: "post",
-				headers: {
-					Accept: "application/json",
-					"Content-Type": "application/json",
-					"Access-Control-Allow-Origin": "*",
-				},
-				body: JSON.stringify(data),
-			},
-			setLoading(true)
-		)
-			.then(function (response) {
-				return response.json()
-			})
-			.then(function (data) {
-				setLoading(false)
-				if (data.status === 200) {
-					router.push(`/${data.username}`)
-				}
-				setTimeout(function () {
-					setSuccessMessage("")
-				}, 10000)
-			})
+		signup(data)
 	}
 
-	const [isShow, setIsShow] = useState(false)
+	if (user?.isLoggedIn) {
+		return (
+			<>
+				<Head>
+					<title>Login to your account | Nextrap</title>
+				</Head>
+				{/*  */}
+				<div className="spinner-grow text-primary" role="status">
+					<span className="sr-only">Loading...</span>
+				</div>
+			</>
+		)
+	}
 
 	return (
 		<>
@@ -60,14 +54,14 @@ function Register() {
 						onSubmit={handleSubmit(onSubmit)}
 					>
 						<Link href="/">
-							<a>
+							<a className="text-dark">
 								<h1 className="text-center">
 									<b>Nextrap</b>
 								</h1>
 							</a>
 						</Link>
-						<h4 className="text-center text-primary">
-							Signup and join the creativerse
+						<h4 className="text-center">
+							Want to part of creativerse, sign in
 						</h4>
 						<div className="form-group">
 							<div className="form-row">
@@ -164,8 +158,12 @@ function Register() {
 								)}
 							</div>
 						</div>
-						<button type="submit" className="btn btn-primary btn-block">
-							REGISTER →
+						<button
+							type="submit"
+							className="btn btn-primary btn-block"
+							disabled={loading === true ? true : false}
+						>
+							{loading === true ? `LOADING...` : `REGISTER →`}
 						</button>
 						<Link href="/login">
 							<a className="my-4 btn btn-link btn-sm btn-block">

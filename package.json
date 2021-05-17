@@ -1,41 +1,45 @@
 {
-  "name": "nextrap",
-  "version": "0.2.2",
-  "private": true,
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start"
-  },
-  "dependencies": {
-    "@hookform/resolvers": "^1.0.0",
-    "axios": "^0.21.1",
-    "bootstrap": "^4.5.2",
-    "cookie": "^0.4.1",
-    "jsonwebtoken": "^8.5.1",
-    "next": "10.0.5",
-    "nprogress": "^0.2.0",
-    "react": "16.13.1",
-    "react-dom": "16.13.1",
-    "react-hook-form": "^6.9.6",
-    "sass": "^1.26.10",
-    "yup": "^0.29.3"
-  },
-  "author": {
-    "name": "Ekim Kael",
-    "email": "michelmbili@gmail.com",
-    "url": "https://ekimkael.github.io"
-  },
-  "contributors": [
-    {
-      "name": "Philippe Tedajo",
-      "email": "philmuse21@gmail.com",
-      "url": "https://www.philippetedajo.com/"
-    },
-    {
-      "name": "Marcel Shinyuy",
-      "email": "shinyuy9@gmail.com",
-      "url": "https://shinyuy.github.io/"
-    }
-  ]
+	"name": "nextrap",
+	"version": "0.5.29",
+	"private": true,
+	"scripts": {
+		"dev": "next dev -p 8000",
+		"build": "next build",
+		"start": "next start"
+	},
+	"dependencies": {
+		"@fullhuman/postcss-purgecss": "^4.0.3",
+		"@hookform/resolvers": "^1.0.0",
+		"autoprefixer": "^10.2.5",
+		"bootstrap": "^4.6",
+		"cookie": "^0.4.1",
+		"jsonwebtoken": "^8.5.1",
+		"next": "10.0.5",
+		"next-iron-session": "^4.1.13",
+		"nprogress": "^0.2.0",
+		"postcss-flexbugs-fixes": "^5.0.2",
+		"postcss-preset-env": "^6.7.0",
+		"react": "16.13.1",
+		"react-dom": "16.13.1",
+		"react-hook-form": "^6.9.6",
+		"sass": "^1.26.10",
+		"yup": "^0.29.3"
+	},
+	"author": {
+		"name": "Ekim Kael",
+		"email": "michelmbili@gmail.com",
+		"url": "https://ekimkael.github.io"
+	},
+	"contributors": [
+		{
+			"name": "Philippe Tedajo",
+			"email": "philmuse21@gmail.com",
+			"url": "https://www.philippetedajo.com/"
+		},
+		{
+			"name": "Marcel Shinyuy",
+			"email": "shinyuy9@gmail.com",
+			"url": "https://shinyuy.github.io/"
+		}
+	]
 }
