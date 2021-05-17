@@ -1,45 +1,40 @@
-import { useState } from "react"
 import Link from "next/link"
 import Head from "next/head"
+import { useRouter } from "next/router"
 import { useForm } from "react-hook-form"
+import { useContext, useEffect } from "react"
+import AuthContext from "../context/AuthContext"
 import { yupResolver } from "@hookform/resolvers/yup"
-import { loginSchema } from "../utils/validationSchemas"
 import AuthTemplate from "../templates/auth.template"
-import Router from "next/router"
-import axios from "axios"
+import { loginSchema } from "../utils/validationSchemas"
 
 function Login() {
-	const [loading, setLoading] = useState(false)
-	const [message, setMessage] = useState("")
-	const [user, setUser] = useState({})
+	const router = useRouter()
+	const { user, message, loading, login, verify } = useContext(AuthContext)
 	const { register, handleSubmit, errors } = useForm({
 		resolver: yupResolver(loginSchema),
 	})
 
+	useEffect(() => {
+		verify()
+		router.push("/account")
+	}, [])
+
 	const onSubmit = (user) => {
-		setLoading(true)
-		axios({
-			method: "post",
-			url: "api/login",
-			data: {
-				identifier: user.email,
-				password: user.password,
-			},
-		}).then(
-			(response) => {
-				setLoading(false)
-				if (response.data.status && response.data.status === 400) {
-					setMessage(response.data.message.body)
-				} else {
-					setUser(response.data.user.username)
-					Router.push(`/settings`)
-				}
-			},
-			(error) => {
-				setLoading(false)
-				setMessage(error.message)
-				console.log(error)
-			}
+		login(user)
+	}
+
+	if (user?.isLoggedIn) {
+		return (
+			<>
+				<Head>
+					<title>Login to your account | Nextrap</title>
+				</Head>
+				{/*  */}
+				<div className="spinner-grow text-primary" role="status">
+					<span className="sr-only">Loading...</span>
+				</div>
+			</>
 		)
 	}
 
@@ -59,9 +54,7 @@ function Login() {
 								</h1>
 							</a>
 						</Link>
-						<h4 className="text-center">
-							Welcome back, sign in to your account
-						</h4>
+						<h4 className="text-center">Join the creativerse</h4>
 						{/* NOTIFICATIONS */}
 						{message !== "" ? (
 							<div className="alert alert-danger" role="alert">

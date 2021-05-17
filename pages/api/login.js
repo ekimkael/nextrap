@@ -1,52 +1,31 @@
-import cookie from "cookie"
+import withSession from "../../utils/session"
 
-export default function login(request, response) {
-	if (request.method === "POST") {
-		if (request.body !== undefined || request.body !== null) {
-			fetch("https://testifyio.herokuapp.com/auth/local", {
-				method: "post",
-				headers: {
-					Accept: "application/json",
-					"Content-Type": "application/json",
-					"Access-Control-Allow-Origin": "*",
-				},
-				body: JSON.stringify({
-					identifier: request.body.identifier,
-					password: request.body.password,
-				}),
-			})
-				.then((answer) => answer.json())
-				.then((datas) => {
-					if (datas.statusCode === 400) {
-						response.status(200).json({
-							status: 400,
-							message: {
-								type: "error",
-								body: "The email address or password is incorrect",
-							},
-						})
-					} else {
-						response.setHeader(
-							"Set-Cookie",
-							cookie.serialize("_SESSIONID_", datas.jwt, {
-								httpOnly: false,
-								secure: process.env.NODE_ENV !== "development",
-								sameSite: "strict",
-								maxAge: 3600,
-								path: "/",
-							})
-						)
-
-						response.status(200).json({
-							status: 200,
-							message: {
-								type: "success",
-								body: "you're now logged in",
-							},
-							user: datas.user,
-						})
-					}
-				})
+export default withSession(async (req, res) => {
+	const url = `${process.env.API_URL}/auth/login`
+	try {
+		// we check that the user exists and store some data in session
+		const response = await fetch(url, {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify(req.body),
+		})
+		const user = await response.json()
+		if (user.code != 1000) {
+			res.status(400)
+			throw new Error(user.message)
 		}
+		const { data, token } = user
+		// _sid for session ID
+		const _sid = { isLoggedIn: true, token }
+		req.session.set("user", _sid)
+		await req.session.save()
+		res.status(200).json({ isLoggedIn: true, data })
+	} catch (error) {
+		if (process.env.NODE_ENV === "development") {
+			console.log(error)
+		}
+		res.status(400).json({ message: error.message })
 	}
-}
+})

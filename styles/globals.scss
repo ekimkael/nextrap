@@ -1,6 +1,6 @@
-$primary: #161d3c;
-$secondary: #cc9e0c;
-$info: #007bff;
+$primary: #3b6fdd;
+$secondary: #fef5fe;
+$info: #6194f4;
 $font-family-sans-serif: "Manrope", -apple-system, BlinkMacSystemFont,
 	"Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
 	sans-serif;
@@ -26,11 +26,3 @@ $link-hover-color: rgba($primary, 0.75) !default;
 
 // Import Bootstrap and its default variables
 @import "~bootstrap/scss/bootstrap.scss";
-
-//Page - profil
-.cover {
-	background: $primary;
-}
-.profile-head {
-	transform: translateY(5rem);
-}

@@ -3,6 +3,7 @@ import "../styles/globals.scss"
 import Router from "next/router"
 import NProgress from "nprogress" //nprogress module
 import "nprogress/nprogress.css" //styles of nprogress
+import { AuthProvider } from "../context/AuthContext"
 
 function MyApp({ Component, pageProps }) {
 	const Template = Component.Template || EmptyTemplate
@@ -20,9 +21,11 @@ function MyApp({ Component, pageProps }) {
 					content="width=device-width, initial-scale=1, shrink-to-fit=no"
 				/>
 			</Head>
-			<Template>
-				<Component {...pageProps} />
-			</Template>
+			<AuthProvider>
+				<Template>
+					<Component {...pageProps} />
+				</Template>
+			</AuthProvider>
 		</>
 	)
 }

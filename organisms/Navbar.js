@@ -1,7 +1,9 @@
-import React from "react"
 import Link from "next/link"
+import React, { useContext } from "react"
+import AuthContext from "../context/AuthContext"
 
 function Navbar() {
+	const { user, logout } = useContext(AuthContext)
 	return (
 		<nav className="navbar navbar-expand-lg navbar-dark bg-primary">
 			<div className="container">
@@ -53,16 +55,36 @@ function Navbar() {
 					id="navbarNav"
 				>
 					<ul className="navbar-nav">
-						<li className="nav-item">
-							<Link href="/login">
-								<a className="nav-link">Login</a>
-							</Link>
-						</li>
-						<li className="nav-item">
-							<Link href="/register">
-								<a className="btn btn-outline-secondary">Get Started</a>
-							</Link>
-						</li>
+						{user != null && user?.isLoggedIn ? (
+							<>
+								{/* <li className="nav-item">
+									<Link href="/account">
+										<a className="nav-link">{user.data.firstname}</a>
+									</Link>
+								</li> */}
+
+								<button
+									type="button"
+									className="btn btn-sm btn-outline-danger alert-danger"
+									onClick={logout}
+								>
+									Logout
+								</button>
+							</>
+						) : (
+							<>
+								<li className="nav-item">
+									<Link href="/login">
+										<a className="nav-link">Login</a>
+									</Link>
+								</li>
+								<li className="nav-item">
+									<Link href="/register">
+										<a className="btn btn-outline-secondary">Get Started</a>
+									</Link>
+								</li>
+							</>
+						)}
 					</ul>
 				</div>
 			</div>
