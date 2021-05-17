@@ -17,14 +17,16 @@ function Login() {
 
 	useEffect(() => {
 		verify()
-		router.push("/account")
-	}, [])
+		if (user && user?.isLoggedIn) {
+			router.push("/account")
+		}
+	}, [user])
 
 	const onSubmit = (user) => {
 		login(user)
 	}
 
-	if (user?.isLoggedIn) {
+	if (!user || user?.isLoggedIn) {
 		return (
 			<>
 				<Head>

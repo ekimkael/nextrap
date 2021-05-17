@@ -20,14 +20,16 @@ function Register() {
 
 	useEffect(() => {
 		verify()
-		router.push("/account")
-	}, [])
+		if (user && user?.isLoggedIn) {
+			router.push("/account")
+		}
+	}, [user])
 
 	const onSubmit = (data) => {
 		signup(data)
 	}
 
-	if (user?.isLoggedIn) {
+	if (!user || user?.isLoggedIn) {
 		return (
 			<>
 				<Head>
