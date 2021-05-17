@@ -56,7 +56,6 @@ export const AuthProvider = ({ children }) => {
 	const logout = async () => {
 		const response = await fetch("/api/logout")
 		const data = await response.json()
-		console.log(data)
 		setUser(data.user)
 		router.push("/login")
 	}
