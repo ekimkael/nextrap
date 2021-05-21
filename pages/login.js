@@ -20,7 +20,7 @@ function Login() {
 		if (user && user?.isLoggedIn) {
 			router.push("/account")
 		}
-	}, [user])
+	}, [user?.isLoggedIn])
 
 	const onSubmit = (user) => {
 		login(user)

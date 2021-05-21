@@ -12,7 +12,7 @@ export default withSession(async (req, res) => {
 			body: JSON.stringify(req.body),
 		})
 		const user = await response.json()
-		if (user.code != 1000) {
+		if (user.code != 200) {
 			res.status(400)
 			throw new Error(user.message)
 		}
